@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^(?:public/(?:js|css|assets)/) - [L]
+DirectoryIndex app/routes/App.php
+RewriteRule ^(.*)$ app/routes/App.php?url=$1 [QSA,L]
+

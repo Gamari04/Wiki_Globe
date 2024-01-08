@@ -1,0 +1,18 @@
+{
+    "name": "youcode/wiki",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Salma",
+            "email": "salmaelgmiri04@gmail.com"
+        }
+    ]
+}
+

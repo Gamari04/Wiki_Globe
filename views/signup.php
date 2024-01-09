@@ -34,14 +34,14 @@
             <form action="submituser" method="POST">
                 <div class="form-outline mb-4">
                 <label class="form-label d-flex flex-row" for="form3Example3">First name</label>
-                <input type="text" id="name" class="form-control" name="firstname" />
-                <span class="error">invalid name</span>
+                <input type="text" id="firstname" class="form-control" name="firstname" />
+                <span class="error">invalid firstname</span>
               
               </div>
               <div class="form-outline mb-4">
               <label class="form-label d-flex flex-row" for="form3Example3">Last name</label>
                 <input type="text" id="lastname" class="form-control" name="lastname" />
-                <span class="error">invalid email</span>
+                <span class="error">invalid lastname</span>
                
               </div>
 
@@ -78,6 +78,6 @@
 </section>
 
 
-<script src="../assets/js/signUp.js"></script>
+<script src="public/js/signUp.js"></script>
 </body>
 </html>

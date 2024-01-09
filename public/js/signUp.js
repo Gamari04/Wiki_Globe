@@ -1,14 +1,24 @@
 let email = document.getElementById("email");
 let password = document.getElementById("password");
-let fullname = document.getElementById("name");
+let firstname = document.getElementById("firstname");
+let lastname = document.getElementById("lastname");
 let emailRegex =/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
 console.log(email);
-fullname.addEventListener("keyup", function () {
+firstname.addEventListener("keyup", function () {
 
-    if (fullname.value === "") {
-      fullname.nextElementSibling.style.display = "block";
+    if (firstname.value === "") {
+      firstname.nextElementSibling.style.display = "block";
     } else {
-      fullname.nextElementSibling.style.display = "none";
+      firstname.nextElementSibling.style.display = "none";
+    }
+  
+  });
+  lastname.addEventListener("keyup", function () {
+
+    if (lastname.value === "") {
+      lastname.nextElementSibling.style.display = "block";
+    } else {
+      lastname.nextElementSibling.style.display = "none";
     }
   
   });

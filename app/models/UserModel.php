@@ -62,11 +62,11 @@ public function login($email, $password)
 
             if (password_verify($password, $currentpass)) {
                 if ($_SESSION["role"] == 'author') {
-                    header("Location:http://localhost/wiki/");
+                    header("Location: home");
                     exit();
 
                 } else {
-                    header("Location:dashboard");
+                    header("Location:admin");
                 }
             }
         }
@@ -86,7 +86,10 @@ public function login($email, $password)
     }
     public function findByAll()
     {
-
+        $query = "SELECT * FROM `user` ";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }
 

@@ -36,4 +36,10 @@ class UserController
             $usermodel->login($email,$password);
         }
     }
+    public function getAllUsers()
+    {
+        $userModel = new UserModel();;
+        $users = $userModel->findByAll();
+        return $users;
+    }
 }

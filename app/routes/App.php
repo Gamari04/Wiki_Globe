@@ -8,9 +8,11 @@ $router = new Router();
 $router->setRoutes([
     'GET' => [
         '' => ['Home', 'index'],
+        'home' => ['Home', 'index'],
         'tags' => ['Home', 'Tags'],
         'signup'=> ['Home','signup'],
         'login'=> ['Home','login'],
+        'admin'=> ['Home','admin'],
     ],
     'POST' => [
         'submituser' => ['UserController', 'saveUser'],

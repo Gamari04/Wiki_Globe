@@ -20,7 +20,7 @@ include("includes/Navbar.php");
   <div class="card mb-3 container " style="max-width: 700px;">
     <div class="row g-0">
       <div class="col-md-4 ">
-        <img src="public/assets/globe3.jpg" class="img-fluid rounded-start" alt="globe">
+        <img src="public/assets/robot.jpg" class="img-fluid rounded-start" alt="globe">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -33,3 +33,4 @@ include("includes/Navbar.php");
     </div>
   </div>
 </section>
+<script src="public/js/bootstrap.bundle.min.js"></script>

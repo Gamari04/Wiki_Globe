@@ -13,7 +13,8 @@ $router->setRoutes([
         'login'=> ['Home','login'],
     ],
     'POST' => [
-     ''=> ['',''],
+        'submituser' => ['UserController', 'saveUser'],
+        'login'=> ['UserController','loguser'],
     ]
 
     

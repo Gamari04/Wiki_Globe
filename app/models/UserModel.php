@@ -5,6 +5,8 @@ use App\dao\DaoInterface;
 use App\config\DbConfig;
 use PDOException;
 use Exception;
+use PDO;
+session_start();
 class UserModel implements DaoInterface
 {
     private $connection;
@@ -17,15 +19,15 @@ class UserModel implements DaoInterface
     public function save($User)
     {
         try {
-        $query= ("INSERT INTO `user` (`firstName`, `lastName`, `email`, `password`) 
-        VALUES (:firstName, :lastName, :email, :password)");
+        
+        $query= ("INSERT INTO `user` (`firstName`, `lastName`, `email`,`password` , `role` ) 
+        VALUES (:firstName, :lastName, :email,:password , :role)");
 
         $name = $User->getFirstname();
         $lastname = $User->getLastname();
         $email = $User->getEmail();
         $password = $User->getPassword();
-
-
+        $role = $User->getRole();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $statement = $this->connection->prepare($query);
 
@@ -33,6 +35,7 @@ class UserModel implements DaoInterface
         $statement->bindParam(':lastName', $lastname);
         $statement->bindParam(':email', $email);
         $statement->bindParam(':password', $hashedPassword);
+        $statement->bindParam('role', $role);
         $result= $statement->execute();
         if ($result) {
             return true;
@@ -44,6 +47,30 @@ class UserModel implements DaoInterface
             return false;
     }
 }
+
+public function login($email, $password)
+    {
+        $sql = "SELECT * FROM `user` WHERE email = :email";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $currentpass = $result["password"];
+            $_SESSION["role"] = $result["role"];
+
+            if (password_verify($password, $currentpass)) {
+                if ($_SESSION["role"] == 'author') {
+                    header("Location:http://localhost/wiki/");
+                    exit();
+
+                } else {
+                    header("Location:dashboard");
+                }
+            }
+        }
+    }
     public function findById($id)
     {
 

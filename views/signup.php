@@ -31,16 +31,16 @@
             <h2 class="fw-bold mb-5">Sign up now</h2>
 
           
-            <form action="" method="post">
+            <form action="submituser" method="POST">
                 <div class="form-outline mb-4">
                 <label class="form-label d-flex flex-row" for="form3Example3">First name</label>
-                <input type="text" id="name" class="form-control" name="fullname" />
+                <input type="text" id="name" class="form-control" name="firstname" />
                 <span class="error">invalid name</span>
               
               </div>
               <div class="form-outline mb-4">
               <label class="form-label d-flex flex-row" for="form3Example3">Last name</label>
-                <input type="email" id="email" class="form-control" name="email" />
+                <input type="text" id="lastname" class="form-control" name="lastname" />
                 <span class="error">invalid email</span>
                
               </div>

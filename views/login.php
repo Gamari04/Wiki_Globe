@@ -23,7 +23,7 @@
             <h2 class="fw-bold mb-5">Sign in </h2>
 
           
-            <form action="../controllers/users/login.php" method="post">
+            <form action="login" method="post">
             
           
               <div class="form-outline mb-4">

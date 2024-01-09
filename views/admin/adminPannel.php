@@ -123,17 +123,17 @@ include(__DIR__ .'../../includes/header.php');
     }
   
   ?>
-
+<!-- 
         <div class="fresh-table full-color-orange">
-  <!--
+  
     Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
     Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
-  -->
+ 
 
   
-    <!-- <div class="col-lg-3 col-sm-6 col-12 mt-3 mb-3">
+     <div class="col-lg-3 col-sm-6 col-12 mt-3 mb-3">
                   <button class="btn bg-gradient-success w-50 mb-0 toast-btn" type="button" data-target="successToast"><a href="form.php">ADD Client</a></button>
-                </div> -->
+                </div> 
   
 
   <table id="fresh-table" class="table">
@@ -147,30 +147,10 @@ include(__DIR__ .'../../includes/header.php');
       
     </thead>
     <tbody>
-    <?php foreach($result as $result1) :?>
-      <tr>
-        <td><?php echo $result1['id']?></td>
-        <td><?php echo $result1['Name']?></td>
-        <td><?php echo $result1['Last name']?></td>
-        <td><?php echo $result1['email']?></td>
-        <td><?php echo $result1['namer']?></td>
-        <td><?php echo $result1['phone']?></td>
-        <!-- <td><button  class="btn btn-default"><a href="edit.php?id=">Edit</a></button></td>-->
-        <td><a class="btn btn-link text-dark px-3 mb-0" href="../dashboard/edit.php?id="><i class="material-icons text-sm me-2">edit</i>Edit</a></td> 
-        <td><button  class="btn btn-default"><a href="../../app/controllers/admin/deleteUser.php?id=<?= $result1['id']?>"><lord-icon
-    src="https://cdn.lordicon.com/skkahier.json"
-    trigger="hover"
-    style="width:30px;height:30px">
-</lord-ico></a></button></td>
-  </div>
-      </tr>
-      
-      <?php endforeach; ?>
-    </tbody>
-  </table>
-</div>
 
-    </div>
+   
+
+    </div> -->
 
 
     

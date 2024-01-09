@@ -2,13 +2,43 @@
 namespace App\models;
 use App\entities\Category;
 use App\dao\DaoInterface;
+use App\config\DbConfig;
+use PDOException;
+use Exception;
 
 class CategoryModel implements DaoInterface
 {
-    public function save($entity)
-    {
+    private $connection;
 
+    public function __construct()
+    {
+        $dbInstance = DbConfig::getInstance();
+        $this->connection = $dbInstance->getConnection();
     }
+    public function save($category)
+    {
+        
+        try {
+        
+            $query= ("INSERT INTO `category` (`name`) 
+            VALUES (:name)");
+    
+            $name = $category->getName();
+            $statement = $this->connection->prepare($query);
+    
+            $statement->bindParam(':name', $name);
+            $result= $statement->execute();
+            if ($result) {
+                return true;
+            }else {
+                throw new Exception("Error inserting category");
+            }
+        }catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return false;
+        }
+    }
+    
     public function findById($id)
     {
 

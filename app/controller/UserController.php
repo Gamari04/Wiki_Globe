@@ -19,8 +19,8 @@ class UserController
             $newUser = new User(null,$firstName, $lastName, $email,'author', $password);
             $usermodel = new UserModel();
             $usermodel->save($newUser);
-            var_dump($usermodel);
-            header("Location: http://localhost/wiki/login");
+            
+            header("Location: login");
         exit;
         }
         
@@ -36,10 +36,5 @@ class UserController
             $usermodel->login($email,$password);
         }
     }
-    public function getAllUsers()
-    {
-        $userModel = new UserModel();;
-        $users = $userModel->findByAll();
-        return $users;
-    }
+ 
 }

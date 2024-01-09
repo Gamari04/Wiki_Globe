@@ -59,7 +59,7 @@ public function login($email, $password)
         if ($result) {
             $currentpass = $result["password"];
             $_SESSION["role"] = $result["role"];
-
+            $_SESSION["user_id"] = $result["id"];
             if (password_verify($password, $currentpass)) {
                 if ($_SESSION["role"] == 'author') {
                     header("Location: home");
@@ -82,8 +82,18 @@ public function login($email, $password)
 
     public function deleteById($id)
     {
-
-    }
+            try {
+                $query = "DELETE FROM `user` WHERE `id` = :id";
+                $stmt = $this->connection->prepare($query);
+                $stmt->bindParam(':id', $id);
+        
+                return $stmt->execute();
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return false;
+            }
+   }
+    
     public function findByAll()
     {
         $query = "SELECT * FROM `user` ";

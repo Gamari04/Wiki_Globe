@@ -27,10 +27,5 @@ class Home
         include_once __DIR__ . '/../../views/login.php';
         exit();
     }
-    public function admin()
-    {
-        
-        include_once __DIR__ . '/../../views/admin/adminPannel.php';
-        exit();
-    }
+   
 }

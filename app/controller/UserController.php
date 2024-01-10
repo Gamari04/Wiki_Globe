@@ -4,7 +4,7 @@ namespace App\controller;
 
 use App\entities\User;
 use App\models\UserModel;
-
+session_start();
 class UserController
 {
     
@@ -36,5 +36,13 @@ class UserController
             $usermodel->login($email,$password);
         }
     }
- 
+    public function logout()
+    {
+      
+        $_SESSION=array();
+         session_destroy();
+
+         header("location:login");
+         exit; 
+    }
 }

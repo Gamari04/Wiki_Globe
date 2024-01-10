@@ -8,20 +8,6 @@ if(isset($_SESSION['role']) &&  $_SESSION['role']!='admin'){
 
 include(__DIR__ .'../../includes/header.php');
 
-
-// include(__DIR__ . '/../../app/models/Book.php');
-// include(__DIR__ . '/../../app/models/User.php');
-// use App\models\User;
-
-
-// $users = new User('','', '', '', '', '');
-// $result = $users->getAllUsers();
-// $total = $users->getTotalUsers();
-// use App\models\Book;
-// $bookss = new Book('', '', '', '', '', '', '', '', '');
-// $row = $bookss->getTotaleBooks();
-// $copies = $bookss->getAllTheCopies();
-// $available = $bookss->getTotalAvailableCopie();
 ?>
 <div class="container">
         <div class="row mt-4">

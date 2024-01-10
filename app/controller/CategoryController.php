@@ -11,6 +11,10 @@ class CategoryController
     {
         require_once __DIR__ .'/../../views/admin/categories.php';
     }
+    public function editCategory()
+    {
+        require_once __DIR__ .'/../../views/admin/editcategory.php';
+    }
     public function saveCategory()
     {
         

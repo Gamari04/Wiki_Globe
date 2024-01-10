@@ -2,6 +2,13 @@
 
 
 include(__DIR__ . '../../includes/header.php');
+
+if(isset($_SESSION['role']) &&  $_SESSION['role']!='admin'){
+    header("Location: login");
+  
+    var_dump($_SESSION["role"]);
+    die();
+}
 ?>
 <section class="p-5">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

@@ -17,8 +17,10 @@ $router->setRoutes([
         'categories'=> ['CategoryController', 'getAllCategories'],
         'delete'=> ['AdminController', 'deleteUser'],
         'deleteCategorie'=> ['CategoryController','deleteCategory'],
+        'editcategorie'=> ['CategoryController','editCategory'],
         'deleteTag'=> ['TagController','deleteTag'],
         'tag'=> ['TagController', 'getAllTags'],
+         'logout'=> ['UserController','logout'],
 
     ],
     'POST' => [

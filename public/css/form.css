@@ -1,0 +1,306 @@
+/* The secret sauce that enables gradient rotation. NOTE: does not work in all browsers. https://caniuse.com/?search=%40property */
+@property --border-angle-1 {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 0deg;
+}
+
+@property --border-angle-2 {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 90deg;
+}
+
+@property --border-angle-3 {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 180deg;
+}
+
+@font-face {
+	font-family: "Aspekta";
+	font-weight: normal;
+	src: url("https://assets.codepen.io/240751/Aspekta-300.woff2") format("woff2");
+}
+
+/* sRGB color. */
+:root {
+	--bright-blue: rgb(0, 100, 255);
+	--bright-green: rgb(0, 255, 0);
+	--bright-red: rgb(255, 0, 0);
+	--background: black;
+	--foreground: white;
+	--border-size: 2px;
+	--border-radius: 0.75em;
+}
+
+/* Display-P3 color, when supported. */
+@supports (color: color(display-p3 1 1 1)) {
+	:root {
+		--bright-blue: color(display-p3 0 0.2 1);
+		--bright-green: color(display-p3 0.4 1 0);
+		--bright-red: color(display-p3 1 0 0);
+	}
+}
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+	min-height: 100dvh;
+	display: grid;
+	place-content: center;
+	margin: 0;
+	font-family: "Aspekta";
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* -- FORM  -- */
+.contactform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  width: 400px;
+}
+
+.contactform input {
+  border: 0;
+  margin-bottom: 10px;
+  padding: 20px;
+  font-size: 17px;
+  background-color: transparent;
+  color: white;
+  font-weight: 200;
+  border: 1px solid white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  cursor: not-allowed;
+  border-radius: var(--border-radius);
+}
+
+.contactform input::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+.contactform:has(+ .animate) > input:nth-child(1) {
+  animation: moveRightAndFadeOut .3s ease-in-out forwards;
+}
+
+.contactform:has(+ .animate) > input:nth-child(2) {
+  animation: moveLeftAndFadeOut .3s ease-in-out .3s forwards;}
+
+.contactform:has(+ .animate) > input:nth-child(3) {
+  animation: moveRightAndFadeOut .3s ease-in-out .6s forwards;
+}
+
+.contactform:has(+ .animate) > input:nth-child(4) {
+  animation: moveLeftAndFadeOut .3s ease-in-out .9s forwards;
+}
+
+
+/* -- BUTTON -- */
+.button {
+	--border-angle-1: 0deg;
+	--border-angle-2: 90deg;
+	--border-angle-3: 180deg;
+	color: inherit;
+  cursor: pointer;
+	font-size: 2rem;
+	font-family: inherit;
+	border: 0;
+	padding: var(--border-size);
+	display: flex;
+	width: max-content;
+	border-radius: var(--border-radius);
+	background-color: transparent;
+	background-image: conic-gradient(
+			from var(--border-angle-1) at 10% 15%,
+			transparent,
+			var(--bright-blue) 10%,
+			transparent 30%,
+			transparent
+		),
+		conic-gradient(
+			from var(--border-angle-2) at 70% 60%,
+			transparent,
+			var(--bright-green) 10%,
+			transparent 60%,
+			transparent
+		),
+		conic-gradient(
+			from var(--border-angle-3) at 50% 20%,
+			transparent,
+			var(--bright-red) 10%,
+			transparent 50%,
+			transparent
+		);
+	animation: 
+		rotateBackground 3s linear infinite,
+		rotateBackground2 8s linear infinite,
+		rotateBackground3 13s linear infinite;
+}
+
+/* Change this background to transparent to see how the gradient works! */
+.button .text {
+	background: var(--background); 
+	padding: 1rem 0;
+  width: 400px;
+	border-radius: calc(var(--border-radius) - var(--border-size));
+	color: var(--foreground);
+}
+
+.rocket {
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Toggling this class, excecute all the animations, using the :has() selector */
+.animate {
+  animation: backgroundImage .1s ease-in-out 1s forwards;
+}
+
+.animate .text > span {
+  transition: all 0.3s ease-in-out;
+  animation: ocultText .3s ease-in-out forwards;
+}
+
+.animate .text > .rocket {
+  transform: translateX(-50%);
+  animation: 
+  vibration .5s ease-in-out .3s 2,
+  launch 1.5s ease-in-out 1.3s forwards;
+}
+
+/* Restart button */
+.restart {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid white;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.restart:hover {
+  background: white;
+  color: black;
+}
+
+.restart:has(~ .animate) {
+  animation: showRestartButton .5s ease-in-out 2.5s forwards;
+}
+
+
+/* -- ANIMATIONS -- */
+/* Inputs */
+@keyframes moveRightAndFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes moveLeftAndFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* Submit button */
+@keyframes backgroundImage {
+  100% {
+    background-image: var(--background);
+    pointer-events: none;
+  }
+}
+
+@keyframes ocultText{
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Rocket */
+@keyframes vibration {
+  0% {
+    margin-left: 0px;
+  }
+  20% {
+    margin-left: -3px;
+  }
+  40% {
+    margin-left: 3px;
+  }
+  60% {
+    margin-left: -3px;
+  }
+  80% {
+    margin-left: 3px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes launch {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  20% {
+    transform: translate(-50%, 10vh);
+  }
+  100% {
+    transform: translate(-50%, -100vh);
+  }
+}
+
+/* restart */
+@keyframes showRestartButton {
+  100% {
+    opacity: 1;
+    pointer-events: all;
+    cursor: pointer;
+    z-index: 1;
+  }
+}
+
+/* gradients */
+@keyframes rotateBackground {
+	to { --border-angle-1: 360deg; }
+}
+
+@keyframes rotateBackground2 {
+	to { --border-angle-2: -270deg; }
+}
+
+@keyframes rotateBackground3 {
+	to { --border-angle-3: 540deg; }
+}

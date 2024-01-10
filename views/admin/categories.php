@@ -57,6 +57,8 @@ include(__DIR__ . '../../includes/header.php');
         <td><?php echo $category['id']?></td>
         <td><?php echo $category['name']?></td>
         <td><a class="btn btn-link text-dark px-3 mb-0" href="deleteCategorie?id=<?= $category['id']?>"><i class="fa-regular fa-trash">Delete</i></a></td>
+        <td><a class="btn btn-link text-dark px-3 mb-0" href="editcategory?id=<?= $category['id']?>"><i class="fa-regular fa-trash">Up date</i></a></td>
+    </tr>
     </tr>
     <?php endforeach; ?>
   </tbody>

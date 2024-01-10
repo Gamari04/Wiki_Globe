@@ -14,12 +14,18 @@ $router->setRoutes([
         'login'=> ['Home','login'],
         'admin'=> ['AdminController','admin'],
         'allusers' => ['AdminController', 'getAllUsers'],
-        'categories'=> ['CategoryController', 'categories'],
+        'categories'=> ['CategoryController', 'getAllCategories'],
         'delete'=> ['AdminController', 'deleteUser'],
+        'deleteCategorie'=> ['CategoryController','deleteCategory'],
+        'deleteTag'=> ['TagController','deleteTag'],
+        'tag'=> ['TagController', 'getAllTags'],
+
     ],
     'POST' => [
         'submituser' => ['UserController', 'saveUser'],
         'login'=> ['UserController','loguser'],
+        'addCategories'=> ['CategoryController', 'saveCategory'],
+        'addtag'=> ['TagController', 'saveTag'],
     ]
 
     

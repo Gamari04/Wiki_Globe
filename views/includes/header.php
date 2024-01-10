@@ -28,6 +28,12 @@
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
+<style>
+  .categorie{
+    background-color: #3B3F44;
+  }
+</style>
+
 </head>
 
 

@@ -11,7 +11,7 @@ class CategoryController
     {
         require_once __DIR__ .'/../../views/admin/categories.php';
     }
-    public function saveUser()
+    public function saveCategory()
     {
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCategory'])) {
@@ -23,7 +23,20 @@ class CategoryController
             header("Location: categories");
         exit;
         }
+    }
+    public function getAllCategories()
+    {
+        $categoryModel = new CategoryModel();;
+        $categories=$categoryModel->findByAll();
         
+        require_once __DIR__ .'/../../views/admin/categories.php';
         
+    }
+    public function deleteCategory()
+    {
+        $id= $_GET['id'];
+        $userModel = new CategoryModel();
+        $userModel->deleteById($id);
+        header("Location: categories");
     }
 }

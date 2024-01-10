@@ -5,7 +5,7 @@ include(__DIR__ . '../../includes/header.php');
 ?>
 <section class="p-5">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add Categories
+        Add Tag
     </button>
 
     <!-- Modal -->
@@ -17,23 +17,23 @@ include(__DIR__ . '../../includes/header.php');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="addCategories" method="post" enctype="multipart/form-data"
+                    <form action="addtag" method="post" enctype="multipart/form-data"
                         class="shadow p-4 rounded mt-5" style="width: 90%; max-width: 50rem;">
 
                         <h1 class="text-center pb-5 display-4 fs-3">
-                            Add New Categorie
+                            Add New Tag
                         </h1>
 
                         <div class="mb-3">
-                            <label class="form-label">Name of Categorie</label>
-                            <input type="text" class="form-control border" placeholder="Enter the name of the categorie"
+                            <label class="form-label">Name of Tag</label>
+                            <input type="text" class="form-control border" placeholder="Enter the name of the tag"
                                 name="name">
                         </div>
 
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="addCategory">Add Categorie</button>
+                            <button type="submit" class="btn btn-primary" name="addtag">Add Tag</button>
                         </div>
                     </form>
                 </div>
@@ -46,17 +46,17 @@ include(__DIR__ . '../../includes/header.php');
   <thead>
     <tr>
       <th scope="col">id</th>
-      <th scope="col">Name of the Categorie</th>
+      <th scope="col">Name of the Tag</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     
-    <?php foreach( $categories as $category): ?>
+    <?php foreach( $tags as $tag): ?>
       <tr>
-        <td><?php echo $category['id']?></td>
-        <td><?php echo $category['name']?></td>
-        <td><a class="btn btn-link text-dark px-3 mb-0" href="deleteCategorie?id=<?= $category['id']?>"><i class="fa-regular fa-trash">Delete</i></a></td>
+        <td><?php echo $tag['id']?></td>
+        <td><?php echo $tag['name']?></td>
+        <td><a class="btn btn-link text-dark px-3 mb-0" href="deleteTag?id=<?= $tag['id']?>"><i class="fa-regular fa-trash">Delete</i></a></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

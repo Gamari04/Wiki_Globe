@@ -1,13 +1,40 @@
 <?php 
 namespace App\models;
-use App\entities\Tag;
 use App\dao\DaoInterface;
+use App\config\DbConfig;
+use PDOException;
+use Exception;
 
 class TagModel implements DaoInterface
 {
-    public function save($entity)
-    {
+    private $connection;
 
+    public function __construct()
+    {
+        $dbInstance = DbConfig::getInstance();
+        $this->connection = $dbInstance->getConnection();
+    }
+    public function save($tag)
+    {
+        try {
+        
+            $query= ("INSERT INTO `tag` (`name`) 
+            VALUES (:name)");
+    
+            $name = $tag->getName();
+            $statement = $this->connection->prepare($query);
+    
+            $statement->bindParam(':name', $name);
+            $result= $statement->execute();
+            if ($result) {
+                return true;
+            }else {
+                throw new Exception("Error inserting category");
+            }
+        }catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return false;
+        }
     }
     public function findById($id)
     {
@@ -20,11 +47,24 @@ class TagModel implements DaoInterface
 
     public function deleteById($id)
     {
-
+        try {
+            $query = "DELETE FROM `tag` WHERE `id` = :id";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(':id', $id);
+    
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
    public function findByAll()
    {
 
+    $query = "SELECT * FROM `tag` ";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll();
    }
 }
 

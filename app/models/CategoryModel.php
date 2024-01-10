@@ -6,6 +6,7 @@ use App\config\DbConfig;
 use PDOException;
 use Exception;
 
+
 class CategoryModel implements DaoInterface
 {
     private $connection;
@@ -50,10 +51,24 @@ class CategoryModel implements DaoInterface
 
     public function deleteById($id)
     {
-
+        try {
+            $query = "DELETE FROM `category` WHERE `id` = :id";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(':id', $id);
+    
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
    public function findByAll()
    {
+   
+    $query = "SELECT * FROM `category` ";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll();
 
    }
 }

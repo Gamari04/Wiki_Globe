@@ -34,13 +34,29 @@ class CategoryController
         $categories=$categoryModel->findByAll();
         
         require_once __DIR__ .'/../../views/admin/categories.php';
-        
+         
+       
     }
     public function deleteCategory()
     {
         $id= $_GET['id'];
-        $userModel = new CategoryModel();
-        $userModel->deleteById($id);
+        $categoryModel = new CategoryModel();
+        $categoryModel->deleteById($id);
         header("Location: categories");
+    }
+    public function updateCategory()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updatecat'])) {
+            $id= $_GET['id'];
+            $name = $_POST['name'];
+            $Category = new Category($id,$name);
+            $categoryModel = new CategoryModel();
+            $categoryModel->update($Category);
+         
+            header("Location: categories");
+        exit;
+        }
+       
+     
     }
 }

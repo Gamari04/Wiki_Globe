@@ -16,6 +16,8 @@ CREATE table wiki(
      title varchar(255),
      content varchar(255),
      user_id INT,
+     created_at DATE,
+     image varchar(255),
      FOREIGN KEY (user_id) REFERENCES user(id),
      category_id INT,
      FOREIGN KEY (category_id) REFERENCES category(id),                    

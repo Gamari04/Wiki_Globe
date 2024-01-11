@@ -25,10 +25,10 @@ class CategoryModel implements DaoInterface
             VALUES (:name)");
     
             $name = $category->getName();
-            $statement = $this->connection->prepare($query);
+            $stmt = $this->connection->prepare($query);
     
-            $statement->bindParam(':name', $name);
-            $result= $statement->execute();
+            $stmt->bindParam(':name', $name);
+            $result= $stmt->execute();
             if ($result) {
                 return true;
             }else {
@@ -44,9 +44,28 @@ class CategoryModel implements DaoInterface
     {
 
     }
-    public function update($entity)
+    public function update($category)
     {
-
+        try {
+        
+            $query= ("UPDATE `category` SET `name` = :name WHERE `id` = :id");
+    
+            $name = $category->getName();
+            $id =  $category->getId();
+            $stmt = $this->connection->prepare($query);
+    
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':id', $id);
+            $result= $stmt->execute();
+            if ($result) {
+                return true;
+            }else {
+                throw new Exception("Error updating category");
+            }
+        }catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return false;
+        }
     }
 
     public function deleteById($id)

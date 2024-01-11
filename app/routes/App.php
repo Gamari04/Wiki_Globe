@@ -17,10 +17,11 @@ $router->setRoutes([
         'categories'=> ['CategoryController', 'getAllCategories'],
         'delete'=> ['AdminController', 'deleteUser'],
         'deleteCategorie'=> ['CategoryController','deleteCategory'],
-        'editcategorie'=> ['CategoryController','editCategory'],
+        'editcategory'=> ['CategoryController','editCategory'],
         'deleteTag'=> ['TagController','deleteTag'],
         'tag'=> ['TagController', 'getAllTags'],
          'logout'=> ['UserController','logout'],
+         'addwiki'=> ['WikiController','wiki'],
 
     ],
     'POST' => [
@@ -28,6 +29,9 @@ $router->setRoutes([
         'login'=> ['UserController','loguser'],
         'addCategories'=> ['CategoryController', 'saveCategory'],
         'addtag'=> ['TagController', 'saveTag'],
+        'editcat' => ['CategoryController', 'updateCategory'],
+        'addNewWiki'=> ['WikiController', 'addWiki'],
+
     ]
 
     

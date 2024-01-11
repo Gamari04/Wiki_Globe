@@ -22,10 +22,10 @@ class TagModel implements DaoInterface
             VALUES (:name)");
     
             $name = $tag->getName();
-            $statement = $this->connection->prepare($query);
+            $stmt = $this->connection->prepare($query);
     
-            $statement->bindParam(':name', $name);
-            $result= $statement->execute();
+            $stmt->bindParam(':name', $name);
+            $result= $stmt->execute();
             if ($result) {
                 return true;
             }else {

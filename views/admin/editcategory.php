@@ -10,11 +10,11 @@
 <body class="bg-black container">
 <div class="container">
 <h1 class="m-5">Up date the Category</h1>
-  <form class="contactform" action="" method="post">
+  <form class="contactform" action="editcat" method="post">
   
     <input  type="text" placeholder="Enter The name of category" name="name" value="">
    
-    <button class="button" type="submit" name="submit">
+    <button class="button" type="submit" name="updatecat">
     <div class="text">
       <span>Up date</span>
       

@@ -1,6 +1,7 @@
 <?php
 include("includes/Navbar.php");
 ?>
+
 <section class="p-5">
   <div class="card mb-3 container " style="max-width: 700px;">
     <div class="row g-0">
@@ -33,4 +34,3 @@ include("includes/Navbar.php");
     </div>
   </div>
 </section>
-<script src="public/js/bootstrap.bundle.min.js"></script>

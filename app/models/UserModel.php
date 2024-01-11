@@ -23,7 +23,7 @@ class UserModel implements DaoInterface
         $query= ("INSERT INTO `user` (`firstName`, `lastName`, `email`,`password` , `role` ) 
         VALUES (:firstName, :lastName, :email,:password , :role)");
 
-        $name = $User->getFirstname();
+        $firstname = $User->getFirstname();
         $lastname = $User->getLastname();
         $email = $User->getEmail();
         $password = $User->getPassword();
@@ -31,7 +31,7 @@ class UserModel implements DaoInterface
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $statement = $this->connection->prepare($query);
 
-        $statement->bindParam(':firstName', $name);
+        $statement->bindParam(':firstName', $firstname);
         $statement->bindParam(':lastName', $lastname);
         $statement->bindParam(':email', $email);
         $statement->bindParam(':password', $hashedPassword);

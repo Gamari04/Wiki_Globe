@@ -66,6 +66,7 @@ class TagModel implements DaoInterface
     $stmt->execute();
     return $stmt->fetchAll();
    }
+  
 }
 
 ?>

@@ -1,7 +1,3 @@
-<?php
-include("includes/Navbar.php");
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +10,11 @@ include("includes/Navbar.php");
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/zgz37y1lik4necz8ruoorr7znjuk9l8xw2lk5xrtpaipcpod/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -40,7 +40,7 @@ include("includes/Navbar.php");
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Category:</label><br>
-                    <select class="js-example-basic-multiple" name="categorie_id" multiple="multiple">
+                    <select class="js-example-basic-single" name="categorie_id">
                         <?php foreach ($categories as $category) { ?>
                             <option value="<?= $category['id'] ?>">
                                 <?= $category['name'] ?>

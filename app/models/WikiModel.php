@@ -1,13 +1,13 @@
 <?php
 namespace App\models;
 
-use App\dao\WikiDao;
+use App\dao\DaoInterface;
 use App\config\DbConfig;
 use PDO;
 use PDOException;
 use Exception;
 
-class WikiModel
+class WikiModel implements DaoInterface
 {
 
     private $connection;
@@ -17,7 +17,7 @@ class WikiModel
         $dbInstance = DbConfig::getInstance();
         $this->connection = $dbInstance->getConnection();
     }
-    public function save($wiki,$tags)
+    public function save($wiki)
     {
         try {
             $query = "INSERT INTO `wiki` (`title`, `content`, `user_id`, `category_id`, `image`, `created_at`) 
@@ -46,11 +46,11 @@ class WikiModel
 
                 $queryTagWiki = "INSERT INTO `tag_wiki` (`tag_id`, `wiki_id`) VALUES (?, ?)";
                 $stmtTagWiki = $this->connection->prepare($queryTagWiki);
-
+                 $tags=$wiki->getTags();
                 foreach ($tags as $tagId) {
                     $resultTag = $stmtTagWiki->execute([$tagId, $lastInsertedId]);
                     if (!$resultTag) {
-                        // Log or handle tag insertion failure
+                       
                         error_log("Tag insertion failed for tag ID: $tagId");
                     }
                 }

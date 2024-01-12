@@ -12,7 +12,7 @@ class Wiki
     private $created_at;
     private $tags=[];
 
-    public function __construct($id, $title, $content, $user_id, $category_id ,$image, $created_at,$tag)
+    public function __construct($id, $title, $content, $user_id, $category_id ,$image, $created_at,$tags)
     {
         $this->id = $id;
         $this->title = $title;
@@ -21,7 +21,7 @@ class Wiki
         $this->category_id = $category_id;
         $this->image = $image;
         $this->created_at = $created_at;
-       
+        $this->tags = $tags;
 
     }
     public function getId()
@@ -52,7 +52,10 @@ class Wiki
     {
         return $this->created_at;
     }
-   
+    public function getTags()
+    {
+        return $this->tags;
+    }
     public function setCategoryId($category_id)
     {
         $this->category_id = $category_id;

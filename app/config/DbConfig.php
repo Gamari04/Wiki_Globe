@@ -41,7 +41,7 @@ class DbConfig
         try {
             if ($this->db === null) {
                 $this->db = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
-                echo "Connection successful";
+             
             }
             return $this->db;
         } catch (PDOException $e) {

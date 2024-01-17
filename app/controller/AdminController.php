@@ -1,13 +1,26 @@
 <?php
 namespace App\controller;
+use App\models\CategoryModel;
 use App\models\UserModel;
 use App\models\WikiModel;
+use App\models\TagModel;
 
 class AdminController
 {
     public function admin()
     {
         
+        $userModel = new UserModel();
+        $total=$userModel->getTotalUsers();
+        $catModel=new CategoryModel();
+        $allCat=$catModel->getTotalCategory();
+        $tagModel=new TagModel();
+        $allTag=$tagModel->getTotalTag();
+        $wikiModel=new WikiModel();
+        $allWiki=$wikiModel->getTotalWiki();
+        $wikiModel = new WikiModel();
+        
+        $wikis = $wikiModel->lastWiki();
         include_once __DIR__ . '/../../views/admin/adminPannel.php';
         exit();
     }
@@ -37,4 +50,6 @@ class AdminController
         $userModel->deleteById($id);
         header("Location: allusers");
     }
+    
+    
 }

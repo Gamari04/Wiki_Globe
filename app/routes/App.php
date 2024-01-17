@@ -10,6 +10,7 @@ $router->setRoutes([
         '' => ['WikiController', 'getAllWiki'],
         'home' => ['WikiController', 'getAllWiki'],
         'tags' => ['Home', 'Tags'],
+         'learn' => ['Home','learnMore'],
         'signup'=> ['Home','signup'],
         'login'=> ['Home','login'],
         'admin'=> ['AdminController','admin'],
@@ -24,6 +25,7 @@ $router->setRoutes([
          'addwiki'=> ['WikiController','wiki'],
          'search'=> ['WikiController','searchWiki'],
          'allWikis'=> ['AdminController','getAllWikis'],
+         'deletewiki'=> ['WikiController','deleteWiki']
 
     ],
     'POST' => [

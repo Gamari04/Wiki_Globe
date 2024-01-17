@@ -1,19 +1,11 @@
 <?php 
 namespace App\models;
-use App\dao\DaoInterface;
-use App\config\DbConfig;
+use App\dao\DaoImp;
 use PDOException;
 use Exception;
-
-class TagModel implements DaoInterface
+use PDO;
+class TagModel extends DaoImp
 {
-    private $connection;
-
-    public function __construct()
-    {
-        $dbInstance = DbConfig::getInstance();
-        $this->connection = $dbInstance->getConnection();
-    }
     public function save($tag)
     {
         try {
@@ -22,7 +14,7 @@ class TagModel implements DaoInterface
             VALUES (:name)");
     
             $name = $tag->getName();
-            $stmt = $this->connection->prepare($query);
+            $stmt = $this->getConnection()->prepare($query);
     
             $stmt->bindParam(':name', $name);
             $result= $stmt->execute();
@@ -36,20 +28,13 @@ class TagModel implements DaoInterface
                 return false;
         }
     }
-    public function findById($id)
-    {
-
-    }
-    public function update($entity)
-    {
-
-    }
+   
 
     public function deleteById($id)
     {
         try {
             $query = "DELETE FROM `tag` WHERE `id` = :id";
-            $stmt = $this->connection->prepare($query);
+            $stmt = $this->getConnection()->prepare($query);
             $stmt->bindParam(':id', $id);
     
             return $stmt->execute();
@@ -62,9 +47,24 @@ class TagModel implements DaoInterface
    {
 
     $query = "SELECT * FROM `tag` ";
-    $stmt = $this->connection->prepare($query);
+    $stmt = $this->getConnection()->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll();
+   }
+   public function getTotalTag()
+   {
+       try {
+           $query = "SELECT COUNT(id) as total_Tag FROM `tag`";
+           $stmt = $this->getConnection()->prepare($query);
+           $stmt->execute();
+   
+           $row = $stmt->fetch(PDO::FETCH_ASSOC);
+   
+           return $row['total_Tag'];
+       } catch (PDOException $e) {
+           echo "Error: " . $e->getMessage();
+           return false;
+       }
    }
   
 }

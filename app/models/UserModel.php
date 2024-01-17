@@ -1,21 +1,14 @@
 <?php
 namespace App\models;
 
-use App\dao\DaoInterface;
-use App\config\DbConfig;
+use App\dao\DaoImp;
 use PDOException;
 use Exception;
 use PDO;
-session_start();
-class UserModel implements DaoInterface
-{
-    private $connection;
 
-    public function __construct()
-    {
-        $dbInstance = DbConfig::getInstance();
-        $this->connection = $dbInstance->getConnection();
-    }
+class UserModel  extends DaoImp
+{
+
     public function save($User)
     {
         try {
@@ -29,7 +22,7 @@ class UserModel implements DaoInterface
         $password = $User->getPassword();
         $role = $User->getRole();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $statement = $this->connection->prepare($query);
+        $statement = $this->getConnection()->prepare($query);
 
         $statement->bindParam(':firstName', $firstname);
         $statement->bindParam(':lastName', $lastname);
@@ -51,7 +44,7 @@ class UserModel implements DaoInterface
 public function login($email, $password)
     {
         $sql = "SELECT * FROM `user` WHERE email = :email";
-        $statement = $this->connection->prepare($sql);
+        $statement = $this->getConnection()->prepare($sql);
         $statement->bindParam(':email', $email);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -71,20 +64,13 @@ public function login($email, $password)
             }
         }
     }
-    public function findById($id)
-    {
 
-    }
-    public function update($entity)
-    {
-
-    }
 
     public function deleteById($id)
     {
             try {
                 $query = "DELETE FROM `user` WHERE `id` = :id";
-                $stmt = $this->connection->prepare($query);
+                $stmt = $this->getConnection()->prepare($query);
                 $stmt->bindParam(':id', $id);
         
                 return $stmt->execute();
@@ -97,9 +83,24 @@ public function login($email, $password)
     public function findByAll()
     {
         $query = "SELECT * FROM `user` ";
-        $stmt = $this->connection->prepare($query);
+        $stmt = $this->getConnection()->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+    public function getTotalUsers()
+    {
+        try {
+            $query = "SELECT COUNT(id) as total_Users FROM `user`";
+            $stmt = $this->getConnection()->prepare($query);
+            $stmt->execute();
+    
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            return $row['total_Users'];
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }
 

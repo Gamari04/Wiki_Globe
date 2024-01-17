@@ -37,12 +37,17 @@ foreach ($wikis as $wiki) {
             </p>
 
             <p class="card-text"><small class="text-body-secondary">
-                <?php echo $wiki['Fname'] ?>
+               Created By: <?php echo $wiki['Fname'] ?>
                 <?php echo $wiki['Lname'] ?>
-                <?php echo $wiki['created_at'] ?>
+                
               </small></p>
+              <p><?php echo $wiki['created_at'] ?></p>
           </div>
-
+          <a href="deletewiki?id=" style="text-decoration: none;">   
+<button type="button"  class="btn btn-light border border-black fs-5" >
+      Archiver
+    </button>
+    </a> 
         </div>
       </div>
     </div>

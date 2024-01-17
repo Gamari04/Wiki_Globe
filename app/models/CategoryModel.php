@@ -1,21 +1,13 @@
 <?php 
 namespace App\models;
-use App\entities\Category;
-use App\dao\DaoInterface;
-use App\config\DbConfig;
+use App\dao\DaoImp;
 use PDOException;
 use Exception;
+use PDO;
 
 
-class CategoryModel implements DaoInterface
+class CategoryModel  extends DaoImp
 {
-    private $connection;
-
-    public function __construct()
-    {
-        $dbInstance = DbConfig::getInstance();
-        $this->connection = $dbInstance->getConnection();
-    }
     public function save($category)
     {
         
@@ -25,7 +17,7 @@ class CategoryModel implements DaoInterface
             VALUES (:name)");
     
             $name = $category->getName();
-            $stmt = $this->connection->prepare($query);
+            $stmt = $this->getConnection()->prepare($query);
     
             $stmt->bindParam(':name', $name);
             $result= $stmt->execute();
@@ -40,10 +32,7 @@ class CategoryModel implements DaoInterface
         }
     }
     
-    public function findById($id)
-    {
-
-    }
+    
     public function update($category)
     {
         try {
@@ -52,7 +41,7 @@ class CategoryModel implements DaoInterface
     
             $name = $category->getName();
             $id =  $category->getId();
-            $stmt = $this->connection->prepare($query);
+            $stmt = $this->getConnection()->prepare($query);
     
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':id', $id);
@@ -72,7 +61,7 @@ class CategoryModel implements DaoInterface
     {
         try {
             $query = "DELETE FROM `category` WHERE `id` = :id";
-            $stmt = $this->connection->prepare($query);
+            $stmt = $this->getConnection()->prepare($query);
             $stmt->bindParam(':id', $id);
     
             return $stmt->execute();
@@ -85,10 +74,25 @@ class CategoryModel implements DaoInterface
    {
    
     $query = "SELECT * FROM `category` ";
-    $stmt = $this->connection->prepare($query);
+    $stmt = $this->getConnection()->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll();
 
+   }
+   public function getTotalCategory()
+   {
+       try {
+           $query = "SELECT COUNT(id) as total_Category FROM `category`";
+           $stmt = $this->getConnection()->prepare($query);
+           $stmt->execute();
+   
+           $row = $stmt->fetch(PDO::FETCH_ASSOC);
+   
+           return $row['total_Category'];
+       } catch (PDOException $e) {
+           echo "Error: " . $e->getMessage();
+           return false;
+       }
    }
 }
 

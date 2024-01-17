@@ -38,9 +38,13 @@ class TagController
     }
     public function deleteTag()
     {
+        if(isset($_GET["id"])){
         $id= $_GET['id'];
         $userModel = new TagModel();
         $userModel->deleteById($id);
         header("Location: tag");
-    }
+        }else{
+        echo"error during delete";
+        }
+    }    
 }

@@ -2,7 +2,7 @@
 
 namespace App\controller;
 
-session_start();
+
 use App\entities\Wiki;
 use App\models\WikiModel;
 
@@ -17,11 +17,8 @@ class WikiController
 {
     public function wiki()
     {
-
-        // bring all categories
         $categoryModel = new CategoryModel();
         $categories = $categoryModel->findByAll();
-        // bring all tags
         $tagModel = new TagModel();
         $tags = $tagModel->findByAll();
 
@@ -34,19 +31,19 @@ class WikiController
     {
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addwiki'])) {
-         
+
             $title = $_POST['title'];
             $content = $_POST['content'];
             $user_id = $_SESSION['user_id'];
             $category_id = $_POST['categorie_id'];
             $tags = $_POST['tag_id'];
 
-            $uploadDir = '../../public/uploads/'; // Set your upload directory path
+            $uploadDir = '../../public/uploads/';
             $uploadFile = $uploadDir . basename($_FILES['image']['name']);
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
                 $image = "/wiki/public/uploads/" . $_FILES['image']['name'];
-                $newWiki = new Wiki(null, $title, $content, $user_id, $category_id, $image, null, $tags);
+                $newWiki = new Wiki(null, $title, $content, $user_id, $category_id, $image, null,0, $tags);
                 $wikimodel = new WikiModel();
                 $wikimodel->save($newWiki);
 
@@ -60,7 +57,7 @@ class WikiController
     public function getAllWiki()
     {
         $wikiModel = new WikiModel();
-        
+
         $wikis = $wikiModel->findByAll();
 
 
@@ -69,11 +66,22 @@ class WikiController
     }
     public function searchWiki()
     {
-        $query=$_GET['q'];
+        $query = isset($_GET['q']) ? $_GET['q'] : '';
         $wikiModel = new WikiModel();
         $wiki = $wikiModel->search($query);
         echo json_encode($wiki);
-       
+
     }
-   
+    public function deleteWiki()
+    {
+        if (isset($_GET["id"])) {
+            $id = $_GET['id'];
+            $wikiModel = new WikiModel();
+            $wikiModel->deleteById($id);
+            header("Location: home");
+          
+        } else {
+            echo "error during delete";
+        }
+    }
 }
